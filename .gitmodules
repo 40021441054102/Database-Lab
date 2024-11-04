@@ -1,0 +1,3 @@
+[submodule "Celestial Objects Database/RKDBH"]
+	path = Celestial Objects Database/RKDBH
+	url = https://github.com/RamtinKosari/RKDBH.git
