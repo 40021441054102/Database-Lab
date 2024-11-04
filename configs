@@ -1,0 +1,111 @@
+#!/bin/bash
+
+# - Dark Yellow Color
+YELLOW_DARK='\033[0m\033[38;2;255;200;0m'
+
+# - Dark Green Color
+GREEN_DARK='\033[0m\033[38;2;120;200;0m'
+
+# - Dark Cyan Color
+CYAN_DARK='\033[0m\033[38;2;0;200;240m'
+
+# - Yellow Color
+YELLOW='\033[0m\033[38;2;255;255;0m'
+
+# - Gray Color
+GRAY='\033[0m\033[38;2;130;200;230m'
+
+# - Cyan Color
+CYAN='\033[0m\033[38;2;106;135;137m'
+
+# - Green Color
+GREEN='\033[0m\033[38;2;0;255;0m'
+
+# - Red Color
+RED='\033[0m\033[38;2;255;0;0m'
+
+# - Reset
+RESET='\033[0m '
+
+# - New Line
+ENDL='\n'
+
+# - Tab
+TAB='   '
+
+# - Warning Log Aternative
+WARNING="${YELLOW}[WARNING]${RESET}"
+
+# - Success Log Aternative
+SUCCESS="${GREEN}[SUCCESS]${RESET}"
+
+# - Failed Log Aternative
+FAILED="${RED}[FAILURE]${RESET}"
+
+# - Delay before Termination ( in Seconds )
+TERMINATION_DELAY=10
+
+# - Method to Get Current Time
+CURRENT() {
+    echo -e "${CYAN}[$(date +"%Y-%m-%d %H:%M:%S.%3N")]${RESET}"
+}
+
+# - Method to Show RKDBH Label Log
+RKDBH() {
+    echo -e "\r\033[K${GRAY}[RKDBH] ${CYAN}[$(date +"%Y-%m-%d %H:%M:%S.%3N")]${RESET}"
+}
+
+# - Method to Log Messages to Log Files
+logger() {
+    # - Get Message
+    MESSAGE=$1
+    # - Get Log File
+    LOG_FILE=$2
+    # - Show Message
+    echo -e "$MESSAGE"
+    # - Check if Log File is Empty
+    if [ "$LOG_FILE" == "" ]; then
+        return
+    fi
+    # - Save Message to Log File
+    echo -e "$MESSAGE" >> $LOG_FILE
+}
+
+# - Method to Create Logs File
+create_log_file() {
+    touch $1
+}
+
+# - Method to Exit After Delay
+terminate_shell() {
+    echo -e "$(RKDBH)${WARNING}Terminating Shell in ${YELLOW}${TERMINATION_DELAY}${RESET}Seconds${RESET}"
+    sleep 10
+    exit 0
+}
+
+# - Logs Directory
+LOGS_DIR="$(pwd)/logs"
+
+# - Database Name
+DATABASE_NAME="qssl"
+
+# - Database Address
+DATABASE_HOST="localhost"
+
+# - Database User
+DATABASE_USER="qb"
+
+# - Database Password
+DATABASE_PASS="1234"
+
+# - Installation Logs Path
+INSTALLATION_LOGS="install.logs"
+
+# - Overwrite Existing Installation Log File (1 : True, 0 : False)
+OVERWRITE_EXIST_LOGS=1
+
+# - User Password
+RKDBH_USER_PASS="mrl"
+
+# - Drop Existing Database
+DROP_EXISTING_DATABASE=1
